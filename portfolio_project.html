@@ -3,11 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Escape Room</title>
+    <title>Hidden Puzzle Game</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&family=Lora:ital,wght@0,400..700;1,400..700&family=Mystery+Quest&display=swap" rel="stylesheet">
+
 </head>
 <body>
-    <canvas id="drawingCanvas" width="800" height="600"></canvas>
+    <!-- 'Game Container' with Background Image -->
+    <div class="game-container">
+        <button class="hidden-button" onclick="openPuzzle()"></button>
+    </div>
+
+    <!-- Puzzle Modal -->
+    <div id="puzzleModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="closePuzzle()">&times;</span>
+            <h2>Solve the Puzzle!</h2>
+            <canvas id="drawingCanvas" width="400" height="400"></canvas>
+        </div>
+    </div>
+
+    <script>
+        // Function to open the puzzle modal
+        function openPuzzle() {
+            document.getElementById("puzzleModal").style.display = "flex";
+            if (typeof initTiles === 'function' && typeof draw === 'function') {
+                initTiles();
+                draw();
+            }
+        }
+
+        // Function to close the puzzle modal
+        function closePuzzle() {
+            document.getElementById("puzzleModal").style.display = "none";
+        }
+
+        // Function to open the code menu the enter 'alohomora'
+        function openDoor(){
+            
+        }
+
+    </script>
+
+    <!-- Link to the JavaScript file containing the sliding puzzle logic -->
     <script src="js/sliding_puzzle.js"></script>
+    <script src="js/hp_quiz.js"></script>
 </body>
 </html>
