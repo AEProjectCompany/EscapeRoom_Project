@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Escape Room</title>
+    <link rel="stylesheet" href="css/main.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&family=Lora:ital,wght@0,400..700;1,400..700&family=Mystery+Quest&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="particle-container">
+      <button id="play-music">🔊</button>
+      <audio id="background-music" loop>
+        <source src="assets/audio/GlowingForest.mp3" type="audio/mp3" />
+      </audio>
+      <h1>Escape from Hogwarts: The Ultimate Wizarding Challenge</h1>
+      <!--<div>
+        Before you looms Hogwarts Castle, shrouded in mist and mystery. The main
+        door is ajar, as if inviting you in. But beware: once you cross the
+        threshold, the doors will close behind you, and the only way out will be
+        to solve the puzzles hidden within its ancient walls. Are you ready for
+        the challenge?
+      </div> -->
+
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+    </div>
+    <div id="intro-overlay">
+      <div id="glow-circle"></div>
+    </div>
+    <div id="parchment-container" class="hidden">
+      <div id="parchment">
+        <p id="story-text"></p>
+        <button id="continue-button" class="hidden">▶</button>
+      </div>
+    </div>
+
+    <div id="form-container" class="hidden">
+      <h2>Enter your wizard name</h2>
+      <input type="text" id="wizard-name" placeholder="Es: Albus Dumbledore" />
+      <div id="sorting-hat-container">
+        <img
+          id="sorting-hat"
+          src="assets/images/HP_Hat.png"
+          alt="Cappello Parlante"
+        />
+
+        <!--<p id="house-result"></p> -->
+      </div>
+      <button id="sorting-hat button">Discover your</button>
+      <button id="start-button">Inizia la tua avventura</button>
+    </div>
+    <script src="js/main.js"></script>
+  </body>
+</html>
