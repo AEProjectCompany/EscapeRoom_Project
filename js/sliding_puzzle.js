@@ -1,11 +1,11 @@
 const canvas = document.getElementById("drawingCanvas");
 const ctx = canvas.getContext("2d");
 const size = 100;
-const gridSize = 3; // To test the puzzle completion, change here to 2 and in initTiles() change the if statement to if (x === 1 && y === 1).
+const gridSize = 2; // To test the puzzle completion, change here to 2 and in initTiles() change the if statement to if (x === 1 && y === 1).
 let tiles = [];
 let empty = { x: 2, y: 2 };
 let gameWon = false;
-const secretCode = 'alohomora';
+const unlockingSpell = 'alohomora';
 
 //source for house colors: https://colors.dopely.top/inside-colors/colors-in-the-world-of-harry-potter-movies/
 // House colors
@@ -29,7 +29,7 @@ function initTiles() {
     tiles = [];
     for (let y = 0; y < gridSize; y++) {
         for (let x = 0; x < gridSize; x++) {
-            if (x === 2 && y === 2) {
+            if (x === 1 && y === 1) { // To test the puzzle completion → initTiles() change the if statement to if (x === 1 && y === 1).
                 tiles.push(null);
             } else {
                 tiles.push({ 
@@ -50,7 +50,7 @@ function getHouseForTile(number) {
     return houses[Math.floor((number - 1) / 2)]; // should pair 2 tiles per house. "Number" is defined in initTiles()
 }
 
-// Shuffle using Fisher-Yates Algorithm
+// Shuffle using Fisher-Yates Algorithm. Shameless copy-paste from stackoverflow.
 function shuffleTiles() {
     for (let i = tiles.length - 2; i > 0; i--) {
         let j = Math.floor(Math.random() * i);
@@ -77,11 +77,10 @@ function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     
     if (gameWon) {
-        // Magical effect for winning
         ctx.fillStyle = "#d3a625";
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         
-        // Add sparkle effect
+        // Add sparkle effect.
         for (let i = 0; i < 10; i++) {
             ctx.fillStyle = `rgba(255, 255, 255, ${Math.random() * 0.5})`;
             ctx.beginPath();
@@ -98,7 +97,7 @@ function draw() {
         // Draw the Alohomora spell
         ctx.fillStyle = '#000000';
         ctx.shadowColor = '#FFF5E6'; // Warm white glow
-        ctx.shadowBlur = 30; // Increased glow radius
+        ctx.shadowBlur = 30;
         ctx.shadowOffsetX = 0;
         ctx.shadowOffsetY = 0;
         ctx.font = "bold 36px 'Mystery Quest', cursive";
@@ -108,6 +107,24 @@ function draw() {
         // Reset shadow
         ctx.shadowColor = 'transparent';
         ctx.shadowBlur = 0;
+
+        // Add click handler for the spell
+        canvas.addEventListener('click', function(event) {
+            const rect = canvas.getBoundingClientRect();
+            const x = event.clientX - rect.left;
+            const y = event.clientY - rect.top;
+            
+            // Check if click is near the center where the text is
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+            const distance = Math.sqrt(Math.pow(x - centerX, 2) + Math.pow(y - centerY, 2));
+            
+            // If click is within 100 pixels of the center
+            if (distance < 100) {
+                window.location.href = 'quiz.html';
+            }
+        });
+        
         return;
     }
     
@@ -178,15 +195,6 @@ canvas.addEventListener("click", (e) => {
     let y = Math.floor((e.clientY - rect.top) / size);
     moveTile(x, y);
 });
-
-function openDoor() {
-    let userAttempt = prompt('Repeat the spell you just read, it will open the door!').toLowerCase();
-    if (userAttempt === secretCode) {
-        // change background picture to next room
-    } else {
-        alert('No, no... I think it said "Alohomora" !');
-    }
-}
 
 // Initialize game
 canvas.width = gridSize * size;

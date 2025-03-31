@@ -10,6 +10,12 @@ body{
     padding: 0;
 }
 
+.text-speech{
+    font-size: 1.2rem;
+    text-align: right;
+    margin-top: 100px;
+    margin-right: 50px;
+}
 
 canvas{
     border: 2px solid black;
@@ -24,12 +30,27 @@ canvas{
     transform: translate(-50%, -50%);
 }
 
-/* Style for the 'game container */
-.game-container {
+/* Style for the 'game container1' (the on the puzzle page */
+.game-container1 {
     position: relative;
     width: 95vw;
     height: 95vh;
     background: url('../assets/images/HP_Room.jpg') no-repeat center center/cover;
+    margin: auto;
+    border: 2px solid black;
+    border-radius: 25%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Style for the 'game container2' (the next room) */
+.game-container2 {
+    position: relative;
+    width: 95vw;
+    height: 95vh;
+    background: url('../assets/images/HP_Discussion.jpg') no-repeat center center/cover;
     margin: auto;
     border: 2px solid black;
     border-radius: 25%;
@@ -70,19 +91,20 @@ canvas{
 }
 
 .modal-content {
-    background: rgba(46, 79, 54, 0.9);
+    background: rgba(70, 27, 27, 0.9); /* Changed to dark mahogany wood color */
     padding: 40px;
-    border-radius: 10px;
+    border-radius: 50%; /* Make it circular */
     text-align: center;
     position: relative;
     box-shadow: 0 0 40px rgba(211, 166, 37, 0.6); 
     border: 2px solid rgba(211, 166, 37, 0.3);
-    width: 40vw;  
-    height: 60vh; 
+    width: 90vh;  /* Use height as reference for perfect circle */
+    height: 90vh; /* Same as width for perfect circle */
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    aspect-ratio: 1; /* Ensure perfect circle */
 }
 
 /* Close button for the modal */
@@ -99,20 +121,38 @@ canvas{
     height: 30px;
 }
 
+/* When hovering the close button, change color and border color */
+.close-button:hover { 
+    color: #ffffff;
+    border-color: #ffffff;
+}
+
 .modal-content h2 {
     color: #ffffff;
     text-shadow: 0 0 20px rgba(255, 255, 255, 0.9); 
     margin-bottom: 40px;
     font-family: "Mystery Quest", cursive;
-    font-size: 3em; /* Larger title */
+    font-size: 3em;
+    position: absolute;
+    top: 10%;
+    width: 100%;
 }
 
 /* Adjust canvas size within modal */
 .modal-content canvas {
-    max-width: 80%;  /* Canvas takes up 80% of modal width */
-    max-height: 80%; /* Canvas takes up 80% of modal height */
-    position: relative; /* Override the absolute positioning */
-    top: auto;
-    left: auto;
-    transform: none;
+    max-width: 80%;  
+    max-height: 80%; 
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin-top: 0; /* Remove margin since we're using absolute positioning */
 }
+
+.unlocking-spell-text {
+    color: rgba(255, 255, 255, 0.5);
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    margin-top: 500px;
+    font-size: 1.5em;
+}
+
