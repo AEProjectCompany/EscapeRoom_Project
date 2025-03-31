@@ -1,18 +1,27 @@
 const canvas = document.getElementById("drawingCanvas");
 const ctx = canvas.getContext("2d");
 const size = 100;
-const gridSize = 3; // Changed to 3x3 for more challenge
+const gridSize = 3; // To test the puzzle completion, change here to 2 and in initTiles() change the if statement to if (x === 1 && y === 1).
 let tiles = [];
 let empty = { x: 2, y: 2 };
 let gameWon = false;
 const secretCode = 'alohomora';
 
+//source for house colors: https://colors.dopely.top/inside-colors/colors-in-the-world-of-harry-potter-movies/
 // House colors
 const houseColors = {
-    gryffindor: '#740001', // Deep red
-    slytherin: '#1a472a',  // Deep green
-    ravenclaw: '#0e1a40',  // Deep blue
-    hufflepuff: '#ecb939'  // Yellow
+    gryffindor: '#740001', 
+    slytherin: '#1A472A',
+    ravenclaw: '#0E1A40',
+    hufflepuff: '#FFD800'
+};
+
+// House symbol colors
+const houseSymbolColors = {
+    gryffindor: '#D3A625',
+    slytherin: '#9e9e9e', // color changed from source, was too dark
+    ravenclaw: '#946B2D',
+    hufflepuff: '#000000'
 };
 
 // Initialize tiles
@@ -38,7 +47,7 @@ function initTiles() {
 // Assign houses to tiles
 function getHouseForTile(number) {
     const houses = ['gryffindor', 'slytherin', 'ravenclaw', 'hufflepuff'];
-    return houses[Math.floor((number - 1) / 2)];
+    return houses[Math.floor((number - 1) / 2)]; // should pair 2 tiles per house. "Number" is defined in initTiles()
 }
 
 // Shuffle using Fisher-Yates Algorithm
@@ -53,11 +62,12 @@ function shuffleTiles() {
 }
 
 // Update empty tile position
-function updateEmptyPosition() {
+// this part is complicated, I found the idea on stackoverflow
+function updateEmptyPosition() { // updates the position of the empty tile in the array based on if the tile is null or not and returns the position of the empty tile
     tiles.forEach((tile, index) => {
         if (!tile) {
-            empty.x = index % gridSize;
-            empty.y = Math.floor(index / gridSize);
+            empty.x = index % gridSize; // index % gridSize gives the column number
+            empty.y = Math.floor(index / gridSize); // This formula gives the row number
         }
     });
 }
@@ -85,10 +95,19 @@ function draw() {
             ctx.fill();
         }
         
-        ctx.fillStyle = "#ae0001";
-        ctx.font = "30px 'Mystery Quest', system-ui";
+        // Draw the Alohomora spell
+        ctx.fillStyle = '#000000';
+        ctx.shadowColor = '#FFF5E6'; // Warm white glow
+        ctx.shadowBlur = 30; // Increased glow radius
+        ctx.shadowOffsetX = 0;
+        ctx.shadowOffsetY = 0;
+        ctx.font = "bold 36px 'Mystery Quest', cursive";
         ctx.textAlign = "center";
-        ctx.fillText("Alohomora", canvas.width / 2, canvas.height / 2);
+        ctx.fillText("Alohomora", canvas.width/2, canvas.height/2);
+        
+        // Reset shadow
+        ctx.shadowColor = 'transparent';
+        ctx.shadowBlur = 0;
         return;
     }
     
@@ -106,15 +125,21 @@ function draw() {
             ctx.lineWidth = 2;
             ctx.strokeRect(x * size, y * size, size, size);
             
-            // Draw house symbol
-            ctx.fillStyle = '#ffffff';
+            // Draw house symbol with outline
+            ctx.strokeStyle = '#000000';
+            ctx.lineWidth = 0.3;
+            ctx.strokeText(tile.house[0].toUpperCase(), x * size + size / 2, y * size + size / 2 + 7);
+            ctx.fillStyle = houseSymbolColors[tile.house];
             ctx.font = "20px 'Mystery Quest', system-ui";
             ctx.textAlign = "center";
             ctx.fillText(tile.house[0].toUpperCase(), x * size + size / 2, y * size + size / 2 + 7);
             
-            // Draw tile number
-            ctx.fillStyle = '#ffffff';
-            ctx.font = "12px Arial";
+            // Draw tile number with outline
+            ctx.strokeStyle = '#000000';
+            ctx.lineWidth = 0.3;
+            ctx.strokeText(tile.number, x * size + size / 2, y * size + size - 5);
+            ctx.fillStyle = houseSymbolColors[tile.house];
+            ctx.font = "24px 'Mystery Quest', system-ui";
             ctx.fillText(tile.number, x * size + size / 2, y * size + size - 5);
         }
     });
