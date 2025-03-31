@@ -113,16 +113,18 @@ function draw() {
             const rect = canvas.getBoundingClientRect();
             const x = event.clientX - rect.left;
             const y = event.clientY - rect.top;
-            
-            // Check if click is near the center where the text is
-            const centerX = canvas.width / 2;
-            const centerY = canvas.height / 2;
-            const distance = Math.sqrt(Math.pow(x - centerX, 2) + Math.pow(y - centerY, 2));
-            
-            // If click is within 100 pixels of the center
-            if (distance < 100) {
-                window.location.href = 'quiz.html';
-            }
+            window.location.href = 'quiz.html';
+        });
+        // Add hover effect to change cursor and shine
+        canvas.addEventListener('mouseenter', function() {
+            canvas.style.cursor = 'zoom-in';
+            canvas.style.boxShadow = '0 0 40px rgb(139, 12, 12)';
+        });
+
+        // Reset cursor when mouse leaves
+        canvas.addEventListener('mouseleave', function() {
+            canvas.style.cursor = 'default';
+            canvas.style.boxShadow = 'none';
         });
         
         return;
@@ -188,16 +190,20 @@ function checkWin() {
     draw();
 }
 
+
+
+
 // Handle canvas clicks
-canvas.addEventListener("click", (e) => {
-    let rect = canvas.getBoundingClientRect();
-    let x = Math.floor((e.clientX - rect.left) / size);
-    let y = Math.floor((e.clientY - rect.top) / size);
+canvas.addEventListener("click", (e) => { // e is the event object  
+    let rect = canvas.getBoundingClientRect(); // gets the position of the canvas relative to the window
+    let x = Math.floor((e.clientX - rect.left) / size); // e.clientX is the horizontal position of the mouse click relative to the left edge of the canvas
+    let y = Math.floor((e.clientY - rect.top) / size); // e.clientY is the vertical position of the mouse click relative to the top edge of the canvas
     moveTile(x, y);
 });
 
+
 // Initialize game
-canvas.width = gridSize * size;
-canvas.height = gridSize * size;
-initTiles();
-draw();
+canvas.width = gridSize * size; // sets the width of the canvas from the size of the grid
+canvas.height = gridSize * size; // sets the height of the canvas from the size of the grid
+initTiles(); 
+draw(); 
