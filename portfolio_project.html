@@ -13,7 +13,7 @@
 </head>
 <body>
     <!-- 'Game Container' with Background Image -->
-    <div class="game-container">
+    <div class="game-container1">
         <button class="hidden-button" onclick="openPuzzle()"></button>
     </div>
 
@@ -21,8 +21,9 @@
     <div id="puzzleModal" class="modal">
         <div class="modal-content">
             <span class="close-button" onclick="closePuzzle()">&times;</span>
-            <h2>Solve the Puzzle!</h2>
+            <h2>Solve the Puzzle <br>to reveal the unlocking spell!</h2>
             <canvas id="drawingCanvas" width="400" height="400"></canvas>
+            <p class="unlocking-spell-text">Once the spell is revealed, click on it to unlock the door.</p>
         </div>
     </div>
 
@@ -42,9 +43,7 @@
         }
 
         // Function to open the code menu the enter 'alohomora'
-        function openDoor(){
-            
-        }
+// make it so clicking a the door will run the functin openDoor();
 
     </script>
 

@@ -2,34 +2,79 @@ body{
     font-family: "Mystery Quest", system-ui;
     font-weight: 700;
     color: whitesmoke;
+    background: radial-gradient(circle at center, 
+        rgba(70, 27, 27, 0.836) 50%,
+        rgb(54, 20, 20) 100%);
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+.text-speech{
+    font-size: 1.2rem;
+    text-align: right;
+    margin-top: 100px;
+    margin-right: 50px;
 }
 
 canvas{
     border: 2px solid black;
     display: block;
     margin: auto;
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.3); /* Soft cold white glow */
+    max-width: 90vw; /* 90% of viewport width */
+    max-height: 90vh; /* 90% of viewport height */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
-/* Style for the game container */
-.game-container {
+/* Style for the 'game container1' (the on the puzzle page */
+.game-container1 {
     position: relative;
-    width: 800px;
-    height: 600px;
+    width: 95vw;
+    height: 95vh;
     background: url('../assets/images/HP_Room.jpg') no-repeat center center/cover;
     margin: auto;
     border: 2px solid black;
+    border-radius: 25%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Style for the 'game container2' (the next room) */
+.game-container2 {
+    position: relative;
+    width: 95vw;
+    height: 95vh;
+    background: url('../assets/images/HP_Discussion.jpg') no-repeat center center/cover;
+    margin: auto;
+    border: 2px solid black;
+    border-radius: 25%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 /* Hidden button placed at a specific location */
 .hidden-button {
     position: absolute;
-    top: 70%; /* Adjust this to the specific location */
-    left: 60%; /* Adjust this to the specific location */
+    top: 29.6%; 
+    left: 47.2%; /* Adjust top and left to the wanted location (currently on clock) */
     width: 50px;
     height: 50px;
-    background-color: rgba(255, 255, 255, 0.1); /* Almost invisible */
+    background-color: rgba(255, 255, 255, 0.05); /* change alpha to see the button better */
     border: none;
-    cursor: pointer;
+    border-radius: 50%; /* makes button round */
+}
+
+.hidden-button:hover { /* When hovering target, give a light shiny effect + change cursor */
+    box-shadow: 0 0 5px 5px rgba(255, 240, 219, 0.4); 
+    cursor: zoom-in;
 }
 
 /* Modal popup for the puzzle */
@@ -40,17 +85,26 @@ canvas{
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(109, 59, 36, 0.8);
     justify-content: center;
     align-items: center;
 }
 
 .modal-content {
-    background: #d88300;
-    padding: 20px;
-    border-radius: 10px;
+    background: rgba(70, 27, 27, 0.9); /* Changed to dark mahogany wood color */
+    padding: 40px;
+    border-radius: 50%; /* Make it circular */
     text-align: center;
     position: relative;
+    box-shadow: 0 0 40px rgba(211, 166, 37, 0.6); 
+    border: 2px solid rgba(211, 166, 37, 0.3);
+    width: 90vh;  /* Use height as reference for perfect circle */
+    height: 90vh; /* Same as width for perfect circle */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    aspect-ratio: 1; /* Ensure perfect circle */
 }
 
 /* Close button for the modal */
@@ -60,5 +114,45 @@ canvas{
     right: 15px;
     font-size: 20px;
     cursor: pointer;
-    color: darkred;
+    color: #5d5d5d;
+    border: 2px solid #5d5d5d;
+    border-radius: 5px;
+    width: 30px;
+    height: 30px;
 }
+
+/* When hovering the close button, change color and border color */
+.close-button:hover { 
+    color: #ffffff;
+    border-color: #ffffff;
+}
+
+.modal-content h2 {
+    color: #ffffff;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.9); 
+    margin-bottom: 40px;
+    font-family: "Mystery Quest", cursive;
+    font-size: 3em;
+    position: absolute;
+    top: 10%;
+    width: 100%;
+}
+
+/* Adjust canvas size within modal */
+.modal-content canvas {
+    max-width: 80%;  
+    max-height: 80%; 
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin-top: 0; /* Remove margin since we're using absolute positioning */
+}
+
+.unlocking-spell-text {
+    color: rgba(255, 255, 255, 0.5);
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    margin-top: 500px;
+    font-size: 1.5em;
+}
+
